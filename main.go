@@ -7,7 +7,9 @@ import (
 )
 
 func main () {
-	c := colly.NewCollector()
+	c := colly.NewCollector(
+		colly.UserAgent("Mozilla"),
+	)
 
 	c.OnHTML("a", func(e *colly.HTMLElement) {
 		err := e.Request.Visit(e.Attr("href"))
@@ -20,7 +22,7 @@ func main () {
 		fmt.Println("Visiting", r.URL)
 	})
 
-	err := c.Visit("http://go-colly.org/")
+	err := c.Visit("https://www.zomato.com/id/jakarta/tebet-restoran")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
